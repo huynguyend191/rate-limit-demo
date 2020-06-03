@@ -2,16 +2,15 @@ Rate limit with express-rate-limit (https://github.com/nfriedly/express-rate-lim
 
 Instruction:
 
-`````npm i
-```` npm start
+`npm i`
+`npm start`
 
 Server will run at http://localhost:5000
 
 Test:
-```` cd test
-```` node all.js
+`cd test`
+`node all.js`
 Or
-```` node news.js
+`node news.js`
 
-Input number of requests per second and run times (in seconds);
-`````
+Input number of requests per second and run times (in seconds)
