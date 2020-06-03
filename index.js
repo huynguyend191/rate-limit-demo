@@ -5,14 +5,14 @@ const bodyParser = require("body-parser");
 const app = express();
 const throttle = throttledQueue(5, 1000); // at most 5 requests per second.
 
-const rateLimiterUsingThirdParty = rateLimit({
+const rateLimiterApiHome = rateLimit({
   windowMs: 1000, // 1 sec
   max: 10,
   message: "You have exceeded the 10 requests in 1 sec limit!",
   headers: true,
 });
 
-const rateLimiterApi = rateLimit({
+const rateLimiterApiNews = rateLimit({
   windowMs: 1000, // 1 sec
   max: 5,
   message: "You have exceeded the 5 requests in 1 sec limit!",
@@ -20,12 +20,11 @@ const rateLimiterApi = rateLimit({
 });
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// app.use(rateLimiterUsingThirdParty);
 
-app.get("/", rateLimiterUsingThirdParty, (req, res) =>
+app.get("/", rateLimiterApiHome, (req, res) =>
   res.status(200).json({ message: "Homepage" })
 );
-app.get("/news", rateLimiterApi, (req, res) =>
+app.get("/news", rateLimiterApiNews, (req, res) =>
   res.status(200).json({ message: "Random news" })
 );
 app.post("/orders", (req, res) => {
